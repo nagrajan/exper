@@ -1,0 +1,30 @@
+{% load static %}
+
+<html>
+<head>
+    <title>{% block title %}My base template{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/default.css" %}" />
+</head>
+<body>
+    <div id="page">
+        <div id="sidebar">
+            {% block sidebar %}
+            <ul>
+                <li><a href="/articles/all">Articles</a></li>
+                <li><a href="/admin/">Admin</a></li>
+                <li><a href="/accounts/register/">Register</a></li>
+                <li><a href="/accounts/login/">Login</a></li>
+                <li><a href="/accounts/logout/">Logout</a></li>
+            </ul>
+            {% endblock %}
+        </div>
+        <div id="content">
+            {% block content %}
+            Empty content block - lets add some stuff.
+            {% endblock %}
+
+            <img src="{% static "assets/images/python-logo.jpg" %}" />
+        </div>
+    </div>
+</body>
+</html>

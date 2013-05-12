@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+    <ul>
+    <li><a href="/articles/all/">Articles</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    <h1> {{ article.title }} </h1>
+    <p> {{ article.body }} </p>
+    {% if article.thumbnail %}
+    <p><img src="/static/assets/{{article.thumbnail}}" width="400" /></p>
+    {% endif %}
+    <p> {{ article.likes }} liked this article. </p>
+    <p><a href="/articles/like/{{article.id}}">Like</a></p>
+
+    <h2>Comments</h2>
+    {% for c in article.comment_set.all %}
+        <p>{{c.name}}: {{c.body}}</p>
+    {% endfor %}
+
+    <p>
+
+    <form action="/articles/add_comment/{{article.id}}/" method="POST">{% csrf_token %}
+    <ul>
+        {{comment_form.as_ul}}
+    </ul>
+
+    <input type="submit" name="submit" value="Post Comment" />
+    </form>
+    </p>
+
+{% endblock %}
+

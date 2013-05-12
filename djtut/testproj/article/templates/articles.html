@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+<ul>
+    <li><a href="/articles/all">Articles</a></li>
+    <li><a href="/articles/create">Create Article</a></li>
+</ul>
+{% endblock %}
+
+
+
+{% block content %}
+
+<h2>Language is: {{ language }} </h2>
+<h2>Session language is: {{ session_language }} </h2>
+
+{%if articles.count > 0 %}
+    {% for article in articles %}
+    <div>
+        <h2><a href="/articles/get/{{ article.id }}/"> {{ article.title }} ( {{article.likes}} likes)</a></h2>
+        <p> {{article.body|lower|truncatewords:"10"}} </p>
+    </div>
+    {% endfor %}
+{% else %}
+    <p>Nothing to show<p>
+{% endif %}
+
+{% endblock %}
