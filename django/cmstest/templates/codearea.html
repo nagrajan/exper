@@ -1,3 +1,25 @@
-{% for image in gallery.picture_set.all %}
-    <img src="{{ image.image.url }}" alt="{{ image.description }}" />
-{% endfor %}
+{% load i18n sekizai_tags %}
+
+{% addtoblock "css" %}
+  {% for cssitem in media.css %}
+  <link rel="stylesheet" type="text/css" href={{ cssitem }}>
+  {% endfor %}
+{% endaddtoblock %}
+
+<div>
+  <textarea cols="40" id="cmbox-{{ object.pk }}" name="codefield" rows="10">
+  {{ object.codefield }}
+  </textarea>
+</div>
+
+{% addtoblock "js" %}
+  {% for jsitem in media.js %}
+  <script src={{ jsitem }}></script>
+  {% endfor %}
+  <script type="text/javascript">
+  CodeMirror.fromTextArea(document.getElementById("cmbox-{{ object.pk }}"), {{ media.opjson }});</script>
+{% endaddtoblock %}
+
+
+
+

@@ -13,9 +13,9 @@ from django.utils.safestring import mark_safe
 CODEMIRROR_PATH = getattr(settings, 'CODEMIRROR_PATH', 'codemirror')
 if CODEMIRROR_PATH.endswith('/'):
     CODEMIRROR_PATH = CODEMIRROR_PATH[:-1]
-CODEMIRROR_MODE = getattr(settings, 'CODEMIRROR_MODE', 'javascript')
+CODEMIRROR_MODE = getattr(settings, 'CODEMIRROR_MODE', 'python')
 CODEMIRROR_THEME = getattr(settings, 'CODEMIRROR_THEME', 'default')
-CODEMIRROR_CONFIG = getattr(settings, 'CODEMIRROR_CONFIG', { 'lineNumbers': True })
+CODEMIRROR_CONFIG = getattr(settings, 'CODEMIRROR_CONFIG', { 'lineNumbers': True, 'indentUnit':4 })
 
 THEME_CSS_FILENAME_RE = re.compile(r'[\w-]+')
 
@@ -25,7 +25,7 @@ class CodeMirrorTextarea(forms.Textarea):
     CodeMirror:
         http://codemirror.net/
     """
-    
+
     @property
     def media(self):
         mode_name = self.mode_name
@@ -38,7 +38,7 @@ class CodeMirrorTextarea(forms.Textarea):
                 "%s/lib/codemirror.js" % CODEMIRROR_PATH,
                 "%s/mode/%s/%s.js" % (CODEMIRROR_PATH, mode_name, mode_name),
             ))
-    
+
     def __init__(self, attrs=None, mode=None, theme=None, config=None, **kwargs):
         u"""Constructor of CodeMirrorTextarea
 
@@ -71,25 +71,25 @@ class CodeMirrorTextarea(forms.Textarea):
             document = forms.TextField(widget=codemirror)
         """
         super(CodeMirrorTextarea, self).__init__(attrs=attrs, **kwargs)
-        
+
         mode = mode or CODEMIRROR_MODE
         if isinstance(mode, basestring):
             mode = { 'name': mode }
         self.mode_name = mode['name']
-        
+
         theme = theme or CODEMIRROR_THEME
         theme_css_filename = THEME_CSS_FILENAME_RE.search(theme).group(0)
         if theme_css_filename == 'default':
             self.theme_css = []
         else:
             self.theme_css = [theme_css_filename]
-        
+
         config = config or {}
         self.option_json = json.dumps(dict(chain(
             CODEMIRROR_CONFIG.items(),
             config.items(),
             [('mode', mode), ('theme', theme)])))
-    
+
     def render(self, name, value, attrs=None):
         u"""Render CodeMirrorTextarea"""
         output = [super(CodeMirrorTextarea, self).render(name, value, attrs),

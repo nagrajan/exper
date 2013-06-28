@@ -159,9 +159,9 @@ INSTALLED_APPS = (
     'cms.plugins.text',
     'cms.plugins.video',
     'cms.plugins.twitter',
-    
+
     'dummyOne',
-    'codemirror2',
+    'codemirror',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

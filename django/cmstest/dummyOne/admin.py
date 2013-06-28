@@ -1,5 +1,5 @@
 from django.contrib import admin
-from codemirror2.admin import CodeMirrorAdmin
+from codemirror.admin import CodeMirrorAdmin
 from dummyOne.models import CodeArea
 
 class CodeAreaAdmin(CodeMirrorAdmin):
