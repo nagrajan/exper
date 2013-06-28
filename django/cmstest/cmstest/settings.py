@@ -6,6 +6,8 @@ PROJECT_PATH = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+CODEMIRROR_PATH = "codemirror"
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -157,6 +159,9 @@ INSTALLED_APPS = (
     'cms.plugins.text',
     'cms.plugins.video',
     'cms.plugins.twitter',
+    
+    'dummyOne',
+    'codemirror2',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
