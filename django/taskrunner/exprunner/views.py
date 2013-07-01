@@ -22,7 +22,7 @@ def home(request):
       <body>
         <h2> Welcome to the home page </h2>
         <p> Nothing here though </p>
-        <p> However, you can add tasks using <a href="/addtask">asstask</a> and <a href="/status">view status</a> page. </p>
+        <p> However, you can add tasks using <a href="/addtask">addtask</a> and <a href="/status">view status</a> page. </p>
       </body>
     </html>
     """

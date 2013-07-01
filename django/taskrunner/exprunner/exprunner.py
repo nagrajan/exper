@@ -49,9 +49,13 @@ def getParentDir(path, level=None):
     return path
 
 def runAndMonitorTask(taskinfo, pk):
-    p = Popen(['/usr/bin/python', os.path.join(getParentDir(__file__, 1), 'runExternalTask.py')], stdout=PIPE, stderr=STDOUT)
-    data = [line for line in p.stdout.readlines()]
-    print data
+    p = Popen(['/usr/bin/python', os.path.join(getParentDir(__file__, 1), 'runExternalTask.py')], stdout=PIPE, stderr=PIPE)
+    data1 = [line for line in p.stdout.readlines()]
+    data2 = p.stderr.read()
+    print data1
+    print data2
     retval = p.wait()
-    updateTaskInDb(taskinfo, "task funished running", pk)
+    updateTaskInDb(taskinfo, "task funished running with exit code %s"%retval, pk)
     pass
+
+
