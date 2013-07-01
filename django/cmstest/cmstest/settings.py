@@ -159,6 +159,7 @@ INSTALLED_APPS = (
     'cms.plugins.text',
     'cms.plugins.video',
     'cms.plugins.twitter',
+    'cms_themes',
 
     'dummyOne',
     'codemirror',

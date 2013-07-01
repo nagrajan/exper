@@ -21,9 +21,9 @@ if __name__ == "__main__":
             print 'syncdb post process...'
             from django.contrib.auth.models import User
 
-            admin_id = 'nagarajan'
+            admin_id = 'admin'
             admin_email = 'junk@mail.com'
-            admin_password = 'admin'
+            admin_password = 'adminpw'
             additional_users = [
                                 ['tempuser', 'user_email@mail.com', 'tempuser_password']
                                 ]
