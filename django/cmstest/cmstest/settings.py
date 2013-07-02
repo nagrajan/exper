@@ -72,6 +72,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_PATH, "assets"),
 )
 
 # List of finder classes that know how to find static files in
@@ -128,8 +129,11 @@ TEMPLATE_DIRS = (
 )
 
 CMS_TEMPLATES = (
-    ('template_1.html', 'Template One'),
-    ('template_2.html', 'Template Two'),
+    ('template_1.html',      'Template One'),
+    ('template_2.html',      'Template Two'),
+    ('template_red.html',    'Template Red'),
+    ('template_black.html',  'Template BW'),
+    ('template_simple.html', 'Template Simple'),
 )
 
 LANGUAGES = [
@@ -159,7 +163,7 @@ INSTALLED_APPS = (
     'cms.plugins.text',
     'cms.plugins.video',
     'cms.plugins.twitter',
-    'cms_themes',
+    #'cms_themes',
 
     'dummyOne',
     'codemirror',

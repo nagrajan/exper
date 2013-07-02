@@ -1,0 +1,24 @@
+{#  menu tags are defined by the CMS page structure. There is some way to generate collections of nodes from any source that I am investigating #}
+{% load menu_tags %}
+{#  iterate all nodes #}
+{% for child in children %}
+    {# create an li element of the correct style for each node #}
+    <li>
+    {%  if child.level == 0 %}
+    {#  create a placeholder only for top-level menu elements on main nav tag for each element  #}
+        {%  if child.get_menu_title.lower != "home" %}
+            <a href="{{ child.get_absolute_url }}">{{ child.get_menu_title }}</a><span class="sep">|</span>
+        {%  endif %}
+    {%  else %}
+    {#  create the a tag for each element  #}
+    <a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">{{ child.get_menu_title }}</a>
+    {% endif %}
+    {#  recurse into children #}
+    {% if child.children %}
+       <ul>
+       {% show_menu from_level to_level extra_inactive extra_active template "" "" child %}
+       </ul>
+    {% endif %}
+    {# terminate this nodes li element #}
+    </li>
+{% endfor %}
