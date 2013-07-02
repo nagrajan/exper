@@ -7,7 +7,7 @@
     {%  if child.level == 0 %}
     {#  create a placeholder only for top-level menu elements on main nav tag for each element  #}
         {%  if child.get_menu_title.lower != "home" %}
-            <a href="{{ child.get_absolute_url }}">{{ child.get_menu_title }}</a><span class="sep">|</span>
+            <a href="{{ child.get_absolute_url }}">{{ child.get_menu_title }}</a>
         {%  endif %}
     {%  else %}
     {#  create the a tag for each element  #}

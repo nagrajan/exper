@@ -1,0 +1,68 @@
+{% load cms_tags menu_tags sekizai_tags %}
+<!DOCTYPE HTML>
+<html>
+  <head>
+    {% render_block "css" %}
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <!-- modernizr enables HTML5 elements and feature detects -->
+    <script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
+  </head>
+
+  <body>
+  {% cms_toolbar %}
+    <div id="main">
+      <header>
+        <div id="logo">
+          <div id="logo_text">
+            <!-- class="logo_colour", allows you to change the colour of the text -->
+            {% placeholder "header" or %}
+            {% show_placeholder "header" request.current_page.get_home_pk_cache %}
+            <!--<h1><a href="index.html">CCS3<span class="logo_colour">_grass</span></a></h1>-->
+            <!--<h2>Simple. Contemporary. Website Template.</h2>-->
+            {% endplaceholder %}
+          </div>
+        </div>
+        <nav>
+          <div id="menu_container">
+            <ul class="sf-menu" id="nav">
+              {% load menu_tags %}
+              {% show_menu 0 100 100 100 "menu-bar.html" %}
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <div id="site_content">
+        <div id="sidebar_container">
+          <div class="sidebar">
+            {% placeholder "sidebar-top" or %}
+            {% endplaceholder %}
+          </div>
+          <div class="sidebar">
+            {% placeholder "sidebar-middle" or %}
+            {% endplaceholder %}
+          </div>
+          <div class="sidebar">
+            {% placeholder "sidebar-bottom" or %}
+            {% endplaceholder %}
+          </div>
+        </div>
+        <div class="content">
+          {% placeholder "content-top" or %}
+          {% endplaceholder %}
+        </div>
+      </div>
+      <footer>
+      </footer>
+    </div>
+    <!-- javascript at the bottom for fast page loading -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.easing-sooper.js"></script>
+    <script type="text/javascript" src="js/jquery.sooperfish.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('ul.sf-menu').sooperfish();
+      });
+    </script>
+    {% render_block "js" %}
+  </body>
+</html>
