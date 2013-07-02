@@ -148,7 +148,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'django.contrib.comments',
     'cms',
     'mptt',
     'menus',
@@ -165,7 +164,6 @@ INSTALLED_APPS = (
     'cms.plugins.text',
     'cms.plugins.video',
     'cms.plugins.twitter',
-    #'cmsplugin_comments',
 
     'dummyOne',
     'codemirror',
@@ -174,8 +172,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
 )
-
-#COMMENTS_APP = 'cmsplugin_comments'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

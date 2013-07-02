@@ -1,4 +1,4 @@
-{% load cms_tags menu_tags sekizai_tags comments %}
+{% load cms_tags menu_tags sekizai_tags %}
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -49,9 +49,6 @@
         <div class="content">
           {% placeholder "content-top" or %}
           {% endplaceholder %}
-        </div>
-        <div class="comments">
-          {% get_comment_count for entry as comment_count %}
         </div>
       </div>
       <footer>
