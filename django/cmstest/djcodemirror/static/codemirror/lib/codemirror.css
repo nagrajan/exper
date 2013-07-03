@@ -3,13 +3,14 @@
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
   font-family: monospace;
-  height: 300px;
+  height: auto;
   border: 2px solid #ddd;
   margin: 10px;
 }
 .CodeMirror-scroll {
   /* Set scrolling behaviour here */
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 /* PADDING */

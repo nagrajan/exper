@@ -6,8 +6,6 @@ PROJECT_PATH = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-CODEMIRROR_PATH = "codemirror"
-
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -126,15 +124,13 @@ TEMPLATE_DIRS = (
     # The docs say it should be absolute path: PROJECT_PATH is precisely one.
     # Life is wonderful!
     os.path.join(PROJECT_PATH, "templates"),
+    os.path.join(PROJECT_PATH, "djcodemirror/templates"),
 )
 
 CMS_TEMPLATES = (
-    ('template_1.html',      'Template One'),
-    ('template_2.html',      'Template Two'),
-    ('template_red.html',    'Template Red'),
-    ('template_black.html',  'Template BW'),
-    ('template_simple.html', 'Template Simple'),
-    ('css3Template.html', 'CSS3 Template'),
+    ('pagetemplate.html', 'Page'),
+    ('pagewctemplate.html', 'Page With Comments'),
+
 )
 
 LANGUAGES = [
@@ -165,8 +161,7 @@ INSTALLED_APPS = (
     'cms.plugins.video',
     'cms.plugins.twitter',
 
-    'dummyOne',
-    'codemirror',
+    'djcodemirror',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

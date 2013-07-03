@@ -19,6 +19,30 @@ CODEMIRROR_CONFIG = getattr(settings, 'CODEMIRROR_CONFIG', { 'lineNumbers': True
 
 THEME_CSS_FILENAME_RE = re.compile(r'[\w-]+')
 
+cm_js_files = (
+    "/static/%s/lib/codemirror.js" % CODEMIRROR_PATH,
+    "/static/%s/mode/%s/%s.js" % (CODEMIRROR_PATH, CODEMIRROR_MODE, CODEMIRROR_MODE),
+)
+
+theme = CODEMIRROR_THEME
+theme_css_filename = THEME_CSS_FILENAME_RE.search(theme).group(0)
+if theme_css_filename == 'default':
+    theme_css = []
+else:
+    theme_css = [theme_css_filename]
+
+cm_css_files = (("/static/%s/lib/codemirror.css" % CODEMIRROR_PATH,) +
+        tuple("/static/%s/theme/%s.css" % (CODEMIRROR_PATH, theme_css_filename)
+                        for theme_css_filename in theme_css))
+
+option_dict = dict(chain(
+            CODEMIRROR_CONFIG.items(),
+            [('mode', CODEMIRROR_MODE), ('theme', CODEMIRROR_THEME)]))
+
+cm_option_json = json.dumps(option_dict)
+cm_option_json_ro = json.dumps(dict(chain(
+            option_dict.items(), [('readonly', CODEMIRROR_MODE),])))
+
 class CodeMirrorTextarea(forms.Textarea):
     u"""Textarea widget render with `CodeMirror`
 
@@ -28,16 +52,10 @@ class CodeMirrorTextarea(forms.Textarea):
 
     @property
     def media(self):
-        mode_name = self.mode_name
         return forms.Media(css = {
-                'all': ("%s/lib/codemirror.css" % CODEMIRROR_PATH,) +
-                    tuple("%s/theme/%s.css" % (CODEMIRROR_PATH, theme_css_filename)
-                        for theme_css_filename in self.theme_css),
+                'all': cm_css_files,
             },
-            js = (
-                "%s/lib/codemirror.js" % CODEMIRROR_PATH,
-                "%s/mode/%s/%s.js" % (CODEMIRROR_PATH, mode_name, mode_name),
-            ))
+            js = cm_js_files,)
 
     def __init__(self, attrs=None, mode=None, theme=None, config=None, **kwargs):
         u"""Constructor of CodeMirrorTextarea
@@ -72,28 +90,10 @@ class CodeMirrorTextarea(forms.Textarea):
         """
         super(CodeMirrorTextarea, self).__init__(attrs=attrs, **kwargs)
 
-        mode = mode or CODEMIRROR_MODE
-        if isinstance(mode, basestring):
-            mode = { 'name': mode }
-        self.mode_name = mode['name']
-
-        theme = theme or CODEMIRROR_THEME
-        theme_css_filename = THEME_CSS_FILENAME_RE.search(theme).group(0)
-        if theme_css_filename == 'default':
-            self.theme_css = []
-        else:
-            self.theme_css = [theme_css_filename]
-
-        config = config or {}
-        self.option_json = json.dumps(dict(chain(
-            CODEMIRROR_CONFIG.items(),
-            config.items(),
-            [('mode', mode), ('theme', theme)])))
-
     def render(self, name, value, attrs=None):
         u"""Render CodeMirrorTextarea"""
         output = [super(CodeMirrorTextarea, self).render(name, value, attrs),
             '<script type="text/javascript">CodeMirror.fromTextArea(document.getElementById(%s), %s);</script>' %
-                ('"id_%s"' % name, self.option_json)]
+                ('"id_%s"' % name, cm_option_json)]
         return mark_safe('\n'.join(output))
 
