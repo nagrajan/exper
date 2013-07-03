@@ -7,8 +7,11 @@
 {% endaddtoblock %}
 
 <div>
-  <textarea cols="40" id="cmbox-{{ object.pk }}" name="codefield" rows="10">
-  {{ object.codefield }}
+  <textarea cols="40" id="cmbox-{{ object.pk }}" class="codefield" rows="10">
+  Code goes here...
+  </textarea>
+  <textarea cols="40" id="cmbox-{{ object.pk }}-ra" class="resultfield" rows="10">
+  Results show up here...
   </textarea>
 </div>
 
@@ -17,8 +20,7 @@
   <script src={{ jsitem }}></script>
   {% endfor %}
   <script type="text/javascript">
-    CodeMirror.fromTextArea(document.getElementById("cmbox-{{ object.pk }}"), {{ media.opjson }});
-  </script>
+  CodeMirror.fromTextArea(document.getElementById("cmbox-{{ object.pk }}"), {{ media.opjson }});</script>
 {% endaddtoblock %}
 
 

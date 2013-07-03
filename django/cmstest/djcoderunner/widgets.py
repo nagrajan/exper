@@ -15,11 +15,7 @@ if CODEMIRROR_PATH.endswith('/'):
     CODEMIRROR_PATH = CODEMIRROR_PATH[:-1]
 CODEMIRROR_MODE = getattr(settings, 'CODEMIRROR_MODE', 'python')
 CODEMIRROR_THEME = getattr(settings, 'CODEMIRROR_THEME', 'default')
-CODEMIRROR_CONFIG = getattr(settings, 'CODEMIRROR_CONFIG',
-                            {'lineNumbers': True,
-                             'indentUnit':4,
-                             'lineWrapping':True,
-                             })
+CODEMIRROR_CONFIG = getattr(settings, 'CODEMIRROR_CONFIG', { 'lineNumbers': True, 'indentUnit':4 })
 
 THEME_CSS_FILENAME_RE = re.compile(r'[\w-]+')
 
@@ -45,7 +41,7 @@ option_dict = dict(chain(
 
 cm_option_json = json.dumps(option_dict)
 cm_option_json_ro = json.dumps(dict(chain(
-            option_dict.items(), [('readOnly', True),])))
+            option_dict.items(), [('readonly', CODEMIRROR_MODE),])))
 
 class CodeMirrorTextarea(forms.Textarea):
     u"""Textarea widget render with `CodeMirror`

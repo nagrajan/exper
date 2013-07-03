@@ -141,7 +141,7 @@ ol li {
 
 header {
   background: #444 url(../images/logo.jpg) no-repeat;
-  height: 200px;
+  height: 100px;
   background-size: cover;
   background-repeat: no-repeat;
   z-index: -100;
@@ -149,7 +149,7 @@ header {
 
 #logo {
   width: 1000px;
-  height: 180px;
+  height: 124px;
   /*background: transparent;*/
   /*color: #888;*/
   padding: 20px 0 0 0;
@@ -194,10 +194,10 @@ header {
 }
 
 nav {
-  height: 44px;
+  height: 40px;
   margin: -44px auto 0 auto;
   background-color: #000;
-  opacity: 0.8;
+  opacity: 1.0;
 }
 
 #menu_container {
@@ -520,7 +520,7 @@ ul#nav {
 
 ul#nav ul {
   background: #80720B;
-  margin-top: 5px;
+  margin-top: 0px;
   padding-bottom: 5px;
 }
 
@@ -563,4 +563,6 @@ ul#nav li a:hover,ul#nav li a:focus {
   z-index: 0;
 }
 
-
+.resultfield {
+  margin: 10px;
+}
