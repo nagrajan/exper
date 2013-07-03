@@ -1,0 +1,51 @@
+<html>
+  <head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $.fn.textWidth = function(){
+        var html_org = $(this).html();
+        var html_calc = '<span>' + html_org + '</span>';
+        $(this).html(html_calc);
+        var width = $(this).find('span:first').width();
+        $(this).html(html_org);
+        return width;
+      };
+      var width = $("#header_1").textWidth();
+      var elem = $("#header_1")[0];
+      var padding = parseInt($("#header_1").css('padding'));
+      elem.style.width = width;
+      elem.parentElement.style.width = width + padding*2 + 2;
+    });
+  </script>
+  <style>
+    #hdr_container{
+        position:relative;
+    }
+
+    #header_1 {
+      color: #0FF;
+      padding:10px;
+      border:0px;
+      margin:0px;
+    }
+    #bgd{
+        position:absolute;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        background-color: #444;
+        border-radius: 7px;
+        opacity:.4;
+        z-index: -1;
+    }
+  </style>
+  </head>
+  <body>
+    <div id="hdr_container">
+      <h2 id="header_1">my header values</h2>
+      <div id="bgd"></div>
+    </div>
+  </body>
+</html>
